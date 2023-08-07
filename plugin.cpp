@@ -1,12 +1,48 @@
+#include "logger.h"
+#include "FormLoader.h"
+#include "Events.h"
+#include "Serialization.h"
+
+#include "Debug.h"
+
+void InitListener(SKSE::MessagingInterface::Message *a_msg)
+{
+    switch (a_msg->type)
+    {
+    case SKSE::MessagingInterface::kNewGame:
+        Serialization::HybridInit();
+        break;
+    case SKSE::MessagingInterface::kPostLoadGame:
+        logger::info("loading a saved game");
+        //TDebug::CheckIsPlayerWerewolf();
+        break;
+    case SKSE::MessagingInterface::kDataLoaded:
+        FormLoader::GetSingleton()->LoadAllForms();
+        break;
+    }
+}
+
 SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SKSE::Init(skse);
+    SetupLog();
+    logger::info("hybrid init");
+    FormLoader::GetSingleton()->CacheGameAddresses();
+    Events::Register();
 
-    // Once all plugins and mods are loaded, then the ~ console is ready and can
-    // be printed to
-    SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message *message) {
-        if (message->type == SKSE::MessagingInterface::kDataLoaded)
-            RE::ConsoleLog::GetSingleton()->Print("Hello, world!");
-    });
+    auto messaging = SKSE::GetMessagingInterface();
+    if (!messaging->RegisterListener(InitListener))
+    {
+        logger::error("failed to load hybrid");
+        return false;
+    }
+
+    if (auto serialization = SKSE::GetSerializationInterface())
+    {
+        serialization->SetUniqueID(Serialization::ID);
+        serialization->SetSaveCallback(&Serialization::SaveCallback);
+        serialization->SetLoadCallback(&Serialization::LoadCallback);
+        serialization->SetRevertCallback(&Serialization::RevertCallback);
+    }
 
     return true;
 }

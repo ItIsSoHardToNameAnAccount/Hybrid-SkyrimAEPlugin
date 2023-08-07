@@ -18,9 +18,9 @@
 UseTab: Never
 TabWidth: '4'
 IndentWidth: '4'
-BasedOnStyle: Google
+BasedOnStyle: Microsoft
 AccessModifierOffset: -4
-ColumnLimit: 120
+ColumnLimit: 200
 NamespaceIndentation: All
 IndentPPDirectives: BeforeHash
 FixNamespaceComments: false
