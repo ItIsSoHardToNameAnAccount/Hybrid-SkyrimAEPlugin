@@ -24,6 +24,11 @@ namespace Events
             {
                 logger::info("player transformed to human form");
                 utility->IsPlayerSwitchRace = false;
+                if (utility->IsPlayerHybrid)
+                {
+                    logger::info("player is a hybrid");
+                    return;
+                }
                 logger::info("player is not marked werewolf");
                 if (!utility->IsPlayerWerewolf())
                 {

@@ -20,6 +20,8 @@ namespace Serialization
     {
         auto utility = Utility::GetSingleton();
 
+        logger::info("Game saved");
+
         if (!a_skse->OpenRecord(SerializationType, SerializationVersion))
         {
             logger::error("failed to open record.");
@@ -62,6 +64,8 @@ namespace Serialization
         std::uint32_t version;
         std::uint32_t length;
         a_skse->GetNextRecordInfo(type, version, length);
+
+        logger::info("Game loaded");
 
         if (type != SerializationType)
         {
