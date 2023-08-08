@@ -28,14 +28,16 @@ public:
 
         //Race
         utility->WerewolfBeastRace = dataHandler->LookupForm(RE::FormID(0x000CDD84), skyrimPluginName)->As<RE::TESRace>();
-        utility->DLC1VampireBeastRace = dataHandler->LookupForm(RE::FormID(0x0200283A), dawnguardPluginName)->As<RE::TESRace>();
+        // Vampire lord formId is 0x0200283A, but it seems the first two numbers must be ignore is it's bigger than zero.
+        utility->DLC1VampireBeastRace = dataHandler->LookupForm(RE::FormID(0x00283A), dawnguardPluginName)->As<RE::TESRace>();
 
         //Spell
         utility->WerewolfChange = dataHandler->LookupForm(RE::FormID(0x00092C48), skyrimPluginName)->As<RE::SpellItem>();
-        utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x0700AA01), hybridPluginName)->As<RE::SpellItem>();
+        // Same as other plugins
+        utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x00AA01), hybridPluginName)->As<RE::SpellItem>();
 
         //Keywork
-        utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), dawnguardPluginName)->As<RE::BGSKeyword>();
+        utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), skyrimPluginName)->As<RE::BGSKeyword>();
     }
 
     void LoadAllForms()
