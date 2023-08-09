@@ -15,7 +15,7 @@ void InitListener(SKSE::MessagingInterface::Message *a_msg)
     case SKSE::MessagingInterface::kPostLoadGame:
         logger::info("loading a saved game");
         Serialization::LoadChecks();
-        //TDebug::CheckHircinesRing();
+        TDebug::DebugGivePlayerBeastBlood();
         break;
     case SKSE::MessagingInterface::kDataLoaded:
         FormLoader::GetSingleton()->LoadAllForms();

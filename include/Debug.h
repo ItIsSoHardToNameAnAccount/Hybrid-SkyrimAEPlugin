@@ -29,4 +29,10 @@ namespace TDebug
             logger::info("get {}",utility->DA05HircinesRingCursed->fullName);
         }
     }
+
+    void DebugGivePlayerBeastBlood()
+    {
+        auto utility = Utility::GetSingleton();
+        utility->PlayerIsWerewolf->value = 1.0f;
+    }
 }

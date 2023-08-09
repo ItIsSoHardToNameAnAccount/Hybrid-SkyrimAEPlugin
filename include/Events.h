@@ -82,6 +82,10 @@ namespace Events
                 logger::info("player has beast blood, ready for Hircine's curse.");
                 EquipEventHandler::Register();
             }
+            else
+            {
+                logger::info("player don't have beast blood");
+            }
         }
         else
         {
