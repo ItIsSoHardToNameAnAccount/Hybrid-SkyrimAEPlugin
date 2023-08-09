@@ -14,6 +14,23 @@ namespace Serialization
 
         logger::info("New game start, init");
         utility->PlayerIsWerewolf->value = 0.0f;
+        utility->IsPlayerSwitchRace = false;
+        utility->IsPlayerHybrid = false;
+    }
+
+    inline void LoadChecks()
+    {
+        auto utility = Utility::GetSingleton();
+        auto playerCharacter = utility->GetPlayer();
+
+        if (playerCharacter->GetRace() != utility->WerewolfBeastRace)
+        {
+            utility->IsPlayerSwitchRace = false;
+        }
+        if (!utility->PlayerHasBeastBlood() || !playerCharacter->HasKeyword(utility->Vampire))
+        {
+            utility->IsPlayerHybrid = false;
+        }
     }
 
     inline void SaveCallback(SKSE::SerializationInterface* a_skse)
