@@ -50,10 +50,6 @@ namespace Events
                     }
                 }
             }
-            else
-            {
-                logger::info("other people changed its form");
-            }
         }
     }
 
