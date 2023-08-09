@@ -33,11 +33,15 @@ public:
 
         //Spell
         utility->WerewolfChange = dataHandler->LookupForm(RE::FormID(0x00092C48), skyrimPluginName)->As<RE::SpellItem>();
-        // Same as other plugins
+        // Same as VampireLord
         utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x00AA01), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridHircinesCurse = dataHandler->LookupForm(RE::FormID(0x014C04), hybridPluginName)->As<RE::SpellItem>();
 
         //Keywork
         utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), skyrimPluginName)->As<RE::BGSKeyword>();
+
+        //Armor
+        utility->DA05HircinesRingCursed = dataHandler->LookupForm(RE::FormID(0x000F82FE), skyrimPluginName)->As<RE::TESObjectARMO>();
     }
 
     void LoadAllForms()

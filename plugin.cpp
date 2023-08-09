@@ -14,7 +14,7 @@ void InitListener(SKSE::MessagingInterface::Message *a_msg)
         break;
     case SKSE::MessagingInterface::kPostLoadGame:
         logger::info("loading a saved game");
-        //TDebug::CheckIsPlayerWerewolf();
+        //TDebug::CheckHircinesRing();
         break;
     case SKSE::MessagingInterface::kDataLoaded:
         FormLoader::GetSingleton()->LoadAllForms();

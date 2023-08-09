@@ -10,8 +10,11 @@ public:
 
     RE::SpellItem *WerewolfChange;
     RE::SpellItem *HybridRegift;
+    RE::SpellItem *HybridHircinesCurse;
 
     RE::BGSKeyword *Vampire;
+
+    RE::TESObjectARMO *DA05HircinesRingCursed;
 
     uintptr_t PlayerSingletonAddress;
 
