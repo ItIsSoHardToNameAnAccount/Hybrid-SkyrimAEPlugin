@@ -23,25 +23,31 @@ public:
     {
         auto utility = Utility::GetSingleton();
 
-        //Global
-        utility->PlayerIsWerewolf = dataHandler->LookupForm(RE::FormID(0x000ED06C), skyrimPluginName)->As<RE::TESGlobal>();
-
         //Race
         utility->WerewolfBeastRace = dataHandler->LookupForm(RE::FormID(0x000CDD84), skyrimPluginName)->As<RE::TESRace>();
         // Vampire lord formId is 0x0200283A, but it seems the first two numbers must be ignore is it's bigger than zero.
         utility->DLC1VampireBeastRace = dataHandler->LookupForm(RE::FormID(0x00283A), dawnguardPluginName)->As<RE::TESRace>();
+        utility->NordRace = dataHandler->LookupForm(RE::FormID(0x013746), skyrimPluginName)->As<RE::TESRace>();
 
         //Spell
         utility->WerewolfChange = dataHandler->LookupForm(RE::FormID(0x00092C48), skyrimPluginName)->As<RE::SpellItem>();
         // Same as VampireLord
         utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x00AA01), hybridPluginName)->As<RE::SpellItem>();
         utility->HybridHircinesCurse = dataHandler->LookupForm(RE::FormID(0x014C04), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridWerewolfStrength = dataHandler->LookupForm(RE::FormID(0x029009), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridVampireAgility = dataHandler->LookupForm(RE::FormID(0x02900E), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridWolfSoul = dataHandler->LookupForm(RE::FormID(0x029012), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridVampireBlood = dataHandler->LookupForm(RE::FormID(0x023F08), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridCureVampireBlood = dataHandler->LookupForm(RE::FormID(0x029013), hybridPluginName)->As<RE::SpellItem>();
 
         //Keywork
         utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), skyrimPluginName)->As<RE::BGSKeyword>();
 
         //Armor
         utility->DA05HircinesRingCursed = dataHandler->LookupForm(RE::FormID(0x000F82FE), skyrimPluginName)->As<RE::TESObjectARMO>();
+
+        //Perk
+        utility->HybridPerk = dataHandler->LookupForm(RE::FormID(0x02900F), hybridPluginName)->As<RE::BGSPerk>();
     }
 
     void LoadAllForms()

@@ -3,23 +3,29 @@
 class Utility
 {
 public:
-    RE::TESGlobal *PlayerIsWerewolf;
-
     RE::TESRace *WerewolfBeastRace;
     RE::TESRace *DLC1VampireBeastRace;
+    RE::TESRace *NordRace;
 
     RE::SpellItem *WerewolfChange;
     RE::SpellItem *HybridRegift;
     RE::SpellItem *HybridHircinesCurse;
+    RE::SpellItem *HybridWerewolfStrength;
+    RE::SpellItem *HybridVampireAgility;
+    RE::SpellItem *HybridWolfSoul;
+    RE::SpellItem *HybridVampireBlood;
+    RE::SpellItem *HybridCureVampireBlood;
 
     RE::BGSKeyword *Vampire;
 
     RE::TESObjectARMO *DA05HircinesRingCursed;
 
+    RE::BGSPerk *HybridPerk;
+
     uintptr_t PlayerSingletonAddress;
 
-    bool IsPlayerSwitchRace = false;
-    bool IsPlayerHybrid = false;
+    RE::TESRace *playerCurrentRace;
+    bool givePlayerWerewolfBonus = false;
 
     static Utility *GetSingleton()
     {
@@ -33,27 +39,28 @@ public:
         return singleton->get();
     }
 
-    bool IsPlayerWerewolf()
-    {
-        if (PlayerIsWerewolf->value == 1.0f)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     bool PlayerHasBeastBlood()
     {
-        if (GetPlayer()->HasSpell(WerewolfChange))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (GetPlayer()->HasSpell(WerewolfChange));
+    }
+
+    bool PlayerHasWerewolfBonus()
+    {
+        return (GetPlayer()->HasSpell(HybridWerewolfStrength));
+    }
+
+    bool PlayerHasVampireBonus()
+    {
+        return (GetPlayer()->HasSpell(HybridVampireAgility));
+    }
+
+    bool PlayerIsHybrid()
+    {
+        return (GetPlayer()->HasPerk(HybridPerk));
+    }
+
+    bool PlayerHasWolfSoul()
+    {
+        return (GetPlayer()->HasSpell(HybridWolfSoul));
     }
 };

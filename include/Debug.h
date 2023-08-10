@@ -4,22 +4,6 @@
 
 namespace TDebug
 {
-    bool CheckIsPlayerWerewolf()
-    {
-        auto utility = Utility::GetSingleton();
-        //auto playerCharacter = utility->GetPlayer();
-        if (utility->IsPlayerWerewolf())
-        {
-            logger::info("player is a werewolf");
-            return true;
-        }
-        else
-        {
-            logger::info("player is not a werewolf");
-            return false;
-        }
-    }
-
     void CheckHircinesRing()
     {
         auto utility = Utility::GetSingleton();
@@ -28,11 +12,5 @@ namespace TDebug
         {
             logger::info("get {}",utility->DA05HircinesRingCursed->fullName);
         }
-    }
-
-    void DebugGivePlayerBeastBlood()
-    {
-        auto utility = Utility::GetSingleton();
-        utility->PlayerIsWerewolf->value = 1.0f;
     }
 }

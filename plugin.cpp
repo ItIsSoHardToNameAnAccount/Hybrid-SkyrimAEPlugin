@@ -10,12 +10,12 @@ void InitListener(SKSE::MessagingInterface::Message *a_msg)
     switch (a_msg->type)
     {
     case SKSE::MessagingInterface::kNewGame:
+        logger::info("New game start, init");
         Serialization::HybridInit();
         break;
     case SKSE::MessagingInterface::kPostLoadGame:
         logger::info("loading a saved game");
         Serialization::LoadChecks();
-        TDebug::DebugGivePlayerBeastBlood();
         break;
     case SKSE::MessagingInterface::kDataLoaded:
         FormLoader::GetSingleton()->LoadAllForms();
@@ -26,7 +26,7 @@ void InitListener(SKSE::MessagingInterface::Message *a_msg)
 SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SKSE::Init(skse);
     SetupLog();
-    logger::info("hybrid init");
+    logger::info("log init");
     FormLoader::GetSingleton()->CacheGameAddresses();
     Events::Register();
 
@@ -37,6 +37,8 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
         return false;
     }
 
+    //seems don't need this yet
+    /*
     if (auto serialization = SKSE::GetSerializationInterface())
     {
         serialization->SetUniqueID(Serialization::ID);
@@ -44,6 +46,6 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
         serialization->SetLoadCallback(&Serialization::LoadCallback);
         serialization->SetRevertCallback(&Serialization::RevertCallback);
     }
-
+    */
     return true;
 }

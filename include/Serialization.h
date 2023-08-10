@@ -12,10 +12,7 @@ namespace Serialization
     {
         auto utility = Utility::GetSingleton();
 
-        logger::info("New game start, init");
-        utility->PlayerIsWerewolf->value = 0.0f;
-        utility->IsPlayerSwitchRace = false;
-        utility->IsPlayerHybrid = false;
+        utility->playerCurrentRace = utility->NordRace;
     }
 
     inline void LoadChecks()
@@ -23,19 +20,12 @@ namespace Serialization
         auto utility = Utility::GetSingleton();
         auto playerCharacter = utility->GetPlayer();
 
-        if (playerCharacter->GetRace() != utility->WerewolfBeastRace)
-        {
-            utility->IsPlayerSwitchRace = false;
-        }
-        if (!utility->PlayerHasBeastBlood() || !playerCharacter->HasKeyword(utility->Vampire))
-        {
-            utility->IsPlayerHybrid = false;
-        }
+        utility->playerCurrentRace = playerCharacter->GetRace();
     }
 
     inline void SaveCallback(SKSE::SerializationInterface* a_skse)
     {
-        auto utility = Utility::GetSingleton();
+        //auto utility = Utility::GetSingleton();
 
         logger::info("Game saved");
 
@@ -47,8 +37,8 @@ namespace Serialization
         else
         {
             std::vector<float> hybridData = {
-                static_cast<float>(utility->IsPlayerSwitchRace), 
-                static_cast<float>(utility->IsPlayerHybrid)
+                //static_cast<float>(utility->IsPlayerSwitchRace), 
+                //static_cast<float>(utility->IsPlayerHybrid)
             };
 
             if (!a_skse->WriteRecordData(hybridData.size()))
@@ -73,7 +63,7 @@ namespace Serialization
 
     inline void LoadCallback(SKSE::SerializationInterface* a_skse)
     {
-        auto utility = Utility::GetSingleton();
+        //auto utility = Utility::GetSingleton();
 
         std::vector<float> hybridData;
 
@@ -117,15 +107,15 @@ namespace Serialization
             }
         }
 
-        utility->IsPlayerSwitchRace = hybridData[0];
-        utility->IsPlayerHybrid = hybridData[1];
+        //utility->IsPlayerSwitchRace = hybridData[0];
+        //utility->IsPlayerHybrid = hybridData[1];
     }
 
     inline void RevertCallback([[maybe_unused]] SKSE::SerializationInterface *a_skse)
     {
-        auto utility = Utility::GetSingleton();
+        //auto utility = Utility::GetSingleton();
 
-        utility->IsPlayerSwitchRace = false;
-        utility->IsPlayerHybrid = false;
+        //utility->IsPlayerSwitchRace = false;
+        //utility->IsPlayerHybrid = false;
     }
 }
