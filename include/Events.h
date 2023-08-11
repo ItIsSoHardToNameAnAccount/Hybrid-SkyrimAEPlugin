@@ -90,7 +90,7 @@ namespace Events
 
                 if (!utility->PlayerIsHybrid())
                 {
-                    if (utility->PlayerHasWerewolfBonus() && !utility->PlayerHasBeastBlood())
+                    if (utility->PlayerHasWerewolfBonus())
                     {
                         //logger::info("player is a vampire, remove werewolf bonus from him but keep the wolf soul with him.");
                         playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
