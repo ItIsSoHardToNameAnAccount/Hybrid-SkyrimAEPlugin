@@ -133,11 +133,30 @@ namespace Events
                     playerCharacter->AddSpell(utility->HybridWerewolfStrength);
                     utility->givePlayerWerewolfBonus = false;
                 }
+
+                //cure thread
                 if (utility->PlayerIsHybrid())
                 {
-                    //logger::info("player cure vampire");
+                    //logger::info("player cure vampire but left werewolf");
                     playerCharacter->AddSpell(utility->HybridCureVampireBlood);
                     playerCharacter->RemovePerk(utility->HybridPerk);
+                    playerCharacter->RemoveSpell(utility->HybridVampireAgility);
+                }
+                else if (utility->PlayerHasWolfSoul())
+                {
+                    //logger::info("player chose to cure vampire when he is not a hybrid");
+                    playerCharacter->RemoveSpell(utility->HybridWolfSoul);
+                    playerCharacter->RemoveSpell(utility->HybridVampireAgility);
+                    EquipEventHandler::Unregister();
+                }
+                else if (utility->PlayerHasWerewolfBonus() && !utility->PlayerHasBeastBlood())
+                {
+                    //logger::info("player cure werewolf");
+                    playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
+                }
+                else if (utility->PlayerHasVampireBonus())
+                {
+                    //logger::info("player cure vampire");
                     playerCharacter->RemoveSpell(utility->HybridVampireAgility);
                 }
             }
