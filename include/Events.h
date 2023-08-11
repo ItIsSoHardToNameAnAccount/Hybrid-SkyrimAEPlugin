@@ -74,6 +74,11 @@ namespace Events
                     //logger::info("player become a werewolf, give him a healthy and strong werewolf bonus");
                     utility->givePlayerWerewolfBonus = true;
                 }
+
+                if (utility->PlayerIsHybrid())
+                {
+                    playerCharacter->AddSpell(utility->HybridWerewolfControl);
+                }
             }
             else if (playerCharacter->HasKeyword(utility->Vampire))
             {
@@ -112,6 +117,11 @@ namespace Events
                         playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
                         //logger::info("also means that player can never become a hybrid again");
                         playerCharacter->AddSpell(utility->HybridCureVampireBlood);
+                    }
+
+                    if (utility->PlayerHasWerewolfControl())
+                    {
+                        playerCharacter->RemoveSpell(utility->HybridWerewolfControl);
                     }
                 }
             }

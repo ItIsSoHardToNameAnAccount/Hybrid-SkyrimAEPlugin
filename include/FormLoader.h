@@ -39,6 +39,7 @@ public:
         utility->HybridWolfSoul = dataHandler->LookupForm(RE::FormID(0x029012), hybridPluginName)->As<RE::SpellItem>();
         utility->HybridVampireBlood = dataHandler->LookupForm(RE::FormID(0x023F08), hybridPluginName)->As<RE::SpellItem>();
         utility->HybridCureVampireBlood = dataHandler->LookupForm(RE::FormID(0x029013), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridWerewolfControl = dataHandler->LookupForm(RE::FormID(0x02E117), hybridPluginName)->As<RE::SpellItem>();
 
         //Keywork
         utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), skyrimPluginName)->As<RE::BGSKeyword>();

@@ -15,6 +15,7 @@ public:
     RE::SpellItem *HybridWolfSoul;
     RE::SpellItem *HybridVampireBlood;
     RE::SpellItem *HybridCureVampireBlood;
+    RE::SpellItem *HybridWerewolfControl;
 
     RE::BGSKeyword *Vampire;
 
@@ -62,5 +63,10 @@ public:
     bool PlayerHasWolfSoul()
     {
         return (GetPlayer()->HasSpell(HybridWolfSoul));
+    }
+
+    bool PlayerHasWerewolfControl()
+    {
+        return (GetPlayer()->HasSpell(HybridWerewolfControl));
     }
 };
