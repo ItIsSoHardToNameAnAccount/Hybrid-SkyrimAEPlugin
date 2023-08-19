@@ -11,7 +11,11 @@ namespace Events
 
         if (equipment == utility->DA05HircinesRingCursed)
         {
-            playerCharacter->AddSpell(utility->HybridHircinesCurse);
+            //untested code, still not sure if unequip the ring would trigger this event
+            if (!playerCharacter->HasSpell(utility->HybridHircinesCurse))
+            {
+                playerCharacter->AddSpell(utility->HybridHircinesCurse);
+            }
         }
     }
 

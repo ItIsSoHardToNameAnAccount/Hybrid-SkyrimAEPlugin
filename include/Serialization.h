@@ -15,12 +15,24 @@ namespace Serialization
         utility->playerCurrentRace = utility->NordRace;
     }
 
+    void PreviousBugFix(Utility *utility, RE::PlayerCharacter *playerCharacter)
+    {
+        //fix bug from 1.0
+        if (playerCharacter->HasPerk(utility->HybridPerk) && playerCharacter->HasSpell(utility->HybridHircinesCurse))
+        {
+            playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
+        }
+    }
+
     inline void LoadChecks()
     {
         auto utility = Utility::GetSingleton();
         auto playerCharacter = utility->GetPlayer();
 
         utility->playerCurrentRace = playerCharacter->GetRace();
+
+        //previous bug fix
+        PreviousBugFix(utility, playerCharacter);
     }
 
     inline void SaveCallback(SKSE::SerializationInterface* a_skse)
