@@ -17,10 +17,11 @@ namespace Serialization
 
     void PreviousBugFix(Utility *utility, RE::PlayerCharacter *playerCharacter)
     {
-        //fix bug from 1.0
-        if (playerCharacter->HasPerk(utility->HybridPerk) && playerCharacter->HasSpell(utility->HybridHircinesCurse))
+        //fix bug from 1.1
+        if (utility->PlayerHasVampireBonus())
         {
-            playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
+            playerCharacter->RemoveSpell(utility->HybridVampireAgility);
+            playerCharacter->AddSpell(utility->HybridVampireAgility);
         }
     }
 
