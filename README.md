@@ -21,3 +21,8 @@ a hybrid.
   * Hard required, I made this mod based on Survival Mode Improved - 1.3.0, so 1.3.0 is the best version to use this mod.
 - [powerofthree's Tweaks](https://www.nexusmods.com/skyrimspecialedition/mods/51073)
   * Soft required, without this, you won't able to jump higher as a vampire.
+# Credit
+- [SkyrimScripting](https://github.com/mrowrpurr) for her template and video.
+- [colinswrath](https://github.com/colinswrath/Survival-Mode-Improved-SKSE) for his great mod, really love it.
+- [GamerPoets](https://www.youtube.com/watch?v=l3FuJA1UGvQ) for his vedio to help me setup creation kit enviroment.
+- [Nukem](https://www.nexusmods.com/skyrimspecialedition/mods/20061) for the creation kit fix, really a life saver.
