@@ -75,12 +75,13 @@ namespace Events
 
                 if (!utility->PlayerHasWerewolfBonus())
                 {
-                    //logger::info("player become a werewolf, give him a healthy and strong werewolf bonus");
+                    //logger::info("Player is once a werewolf again, give him werewolf bonus when he back to human form");
                     utility->givePlayerWerewolfBonus = true;
                 }
 
                 if (utility->PlayerIsHybrid())
                 {
+                    //logger::info("Allow player back to human form anytime he want");
                     playerCharacter->AddSpell(utility->HybridWerewolfControl);
                 }
             }
@@ -117,15 +118,8 @@ namespace Events
                     if (!utility->PlayerHasBeastBlood())
                     {
                         playerCharacter->RemovePerk(utility->HybridPerk);
-                        //logger::info("the magic is so powerful so this time, no wolf soul remain");
                         playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
-                        //logger::info("also means that player can never become a hybrid again");
-                        playerCharacter->AddSpell(utility->HybridCureVampireBlood);
-                    }
-
-                    if (utility->PlayerHasWerewolfControl())
-                    {
-                        playerCharacter->RemoveSpell(utility->HybridWerewolfControl);
+                        playerCharacter->AddSpell(utility->HybridCureBeastBlood);
                     }
                 }
             }
@@ -142,7 +136,8 @@ namespace Events
                 if (utility->PlayerIsHybrid())
                 {
                     //logger::info("player cure vampire but left werewolf");
-                    playerCharacter->AddSpell(utility->HybridCureVampireBlood);
+                    //logger::info("Cure Beast Blood is used to reset c00");
+                    playerCharacter->AddSpell(utility->HybridCureBeastBlood);
                     playerCharacter->RemovePerk(utility->HybridPerk);
                     playerCharacter->RemoveSpell(utility->HybridVampireAgility);
                 }
@@ -153,12 +148,14 @@ namespace Events
                     playerCharacter->RemoveSpell(utility->HybridVampireAgility);
                     EquipEventHandler::Unregister();
                 }
-                else if (utility->PlayerHasWerewolfBonus() && !utility->PlayerHasBeastBlood())
+
+                if (utility->PlayerHasWerewolfBonus() && !utility->PlayerHasBeastBlood())
                 {
                     //logger::info("player cure werewolf");
                     playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
                 }
-                else if (utility->PlayerHasVampireBonus())
+                
+                if (utility->PlayerHasVampireBonus())
                 {
                     //logger::info("player cure vampire");
                     playerCharacter->RemoveSpell(utility->HybridVampireAgility);

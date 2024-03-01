@@ -6,12 +6,12 @@ class FormLoader
 {
 public:
     const std::string_view hybridPluginName = "Hybrid.esp";
-    const std::string_view smiPluginName = "SurvivalModeImproved.esp";
     const std::string_view updatePluginName = "Update.esm";
     const std::string_view skyrimPluginName = "Skyrim.esm";
     const std::string_view dawnguardPluginName = "Dawnguard.esm";
     const std::string_view heartfiresPluginName = "HearthFires.esm";
     const std::string_view dragonbornPluginName = "Dragonborn.esm";
+    const std::string_view survivalModePluginName = "ccqdrsse001-survivalmode.esl";
 
     static FormLoader *GetSingleton()
     {
@@ -22,6 +22,7 @@ public:
     void LoadMiscForms(RE::TESDataHandler *dataHandler)
     {
         auto utility = Utility::GetSingleton();
+        utility->player = RE::PlayerCharacter::GetSingleton();
 
         //Race
         utility->WerewolfBeastRace = dataHandler->LookupForm(RE::FormID(0x000CDD84), skyrimPluginName)->As<RE::TESRace>();
@@ -31,15 +32,14 @@ public:
 
         //Spell
         utility->WerewolfChange = dataHandler->LookupForm(RE::FormID(0x00092C48), skyrimPluginName)->As<RE::SpellItem>();
-        // Same as VampireLord
-        utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x00AA01), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridHircinesCurse = dataHandler->LookupForm(RE::FormID(0x014C04), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridWerewolfStrength = dataHandler->LookupForm(RE::FormID(0x029009), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridVampireAgility = dataHandler->LookupForm(RE::FormID(0x02900E), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridWolfSoul = dataHandler->LookupForm(RE::FormID(0x029012), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridVampireBlood = dataHandler->LookupForm(RE::FormID(0x023F08), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridCureVampireBlood = dataHandler->LookupForm(RE::FormID(0x029013), hybridPluginName)->As<RE::SpellItem>();
-        utility->HybridWerewolfControl = dataHandler->LookupForm(RE::FormID(0x02E117), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x005900), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridHircinesCurse = dataHandler->LookupForm(RE::FormID(0x01EE18), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridWerewolfStrength = dataHandler->LookupForm(RE::FormID(0x019D0E), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridVampireAgility = dataHandler->LookupForm(RE::FormID(0x014C07), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridWolfSoul = dataHandler->LookupForm(RE::FormID(0x019D15), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridVampireBlood = dataHandler->LookupForm(RE::FormID(0x019D0B), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridCureBeastBlood = dataHandler->LookupForm(RE::FormID(0x01EE1B), hybridPluginName)->As<RE::SpellItem>();
+        utility->HybridWerewolfControl = dataHandler->LookupForm(RE::FormID(0x00FB03), hybridPluginName)->As<RE::SpellItem>();
 
         //Keywork
         utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), skyrimPluginName)->As<RE::BGSKeyword>();
@@ -48,7 +48,7 @@ public:
         utility->DA05HircinesRingCursed = dataHandler->LookupForm(RE::FormID(0x000F82FE), skyrimPluginName)->As<RE::TESObjectARMO>();
 
         //Perk
-        utility->HybridPerk = dataHandler->LookupForm(RE::FormID(0x02900F), hybridPluginName)->As<RE::BGSPerk>();
+        utility->HybridPerk = dataHandler->LookupForm(RE::FormID(0x014C06), hybridPluginName)->As<RE::BGSPerk>();
     }
 
     void LoadAllForms()
@@ -56,18 +56,7 @@ public:
         logger::info("loading all forms");
 
         const auto dataHandler = RE::TESDataHandler::GetSingleton();
-        if (!dataHandler->LookupLoadedLightModByName("SurvivalModeImproved.esp"))
-        {
-            return;
-        }
-
         LoadMiscForms(dataHandler);
         logger::info("All forms are loaded.");
-    }
-
-    void CacheGameAddresses()
-    {
-        auto utility = Utility::GetSingleton();
-        utility->PlayerSingletonAddress = RELOCATION_ID(517014, 403521).address();
     }
 };

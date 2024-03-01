@@ -14,7 +14,7 @@ public:
     RE::SpellItem *HybridVampireAgility;
     RE::SpellItem *HybridWolfSoul;
     RE::SpellItem *HybridVampireBlood;
-    RE::SpellItem *HybridCureVampireBlood;
+    RE::SpellItem *HybridCureBeastBlood;
     RE::SpellItem *HybridWerewolfControl;
 
     RE::BGSKeyword *Vampire;
@@ -23,7 +23,7 @@ public:
 
     RE::BGSPerk *HybridPerk;
 
-    uintptr_t PlayerSingletonAddress;
+    RE::PlayerCharacter *player;
 
     RE::TESRace *playerCurrentRace;
     bool givePlayerWerewolfBonus = false;
@@ -34,39 +34,38 @@ public:
         return &singleton;
     }
 
-    static RE::PlayerCharacter *GetPlayer()
+    RE::PlayerCharacter *GetPlayer()
     {
-        REL::Relocation<RE::NiPointer<RE::PlayerCharacter> *> singleton{Utility::GetSingleton()->PlayerSingletonAddress};
-        return singleton->get();
+        return player;
     }
 
     bool PlayerHasBeastBlood()
     {
-        return (GetPlayer()->HasSpell(WerewolfChange));
+        return (player->HasSpell(WerewolfChange));
     }
 
     bool PlayerHasWerewolfBonus()
     {
-        return (GetPlayer()->HasSpell(HybridWerewolfStrength));
+        return (player->HasSpell(HybridWerewolfStrength));
     }
 
     bool PlayerHasVampireBonus()
     {
-        return (GetPlayer()->HasSpell(HybridVampireAgility));
+        return (player->HasSpell(HybridVampireAgility));
     }
 
     bool PlayerIsHybrid()
     {
-        return (GetPlayer()->HasPerk(HybridPerk));
+        return (player->HasPerk(HybridPerk));
     }
 
     bool PlayerHasWolfSoul()
     {
-        return (GetPlayer()->HasSpell(HybridWolfSoul));
+        return (player->HasSpell(HybridWolfSoul));
     }
 
     bool PlayerHasWerewolfControl()
     {
-        return (GetPlayer()->HasSpell(HybridWerewolfControl));
+        return (player->HasSpell(HybridWerewolfControl));
     }
 };
