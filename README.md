@@ -1,28 +1,34 @@
 # Hybrid-SkyrimAEPlugin
 Skyrim SKSE plugin allow player become both werewolf and vampire.
-# How to use
-- There are three steps to become a hybrid.
-  
-  * a. Become a werewolf
-  
-  * b. Become a vampire
-  
-  * c. You must become a werewolf first before you become a vampire
-  
-  * d. Go to get the cursed Hircine's ring. Once you get the ring you will transformed into a werewolf in 60 seconds, after turn to a werewolf, wait to turn back to human and you are
-a hybrid.
-# Advantage
-- Werewolf have extra 100 carry weight, and don't need to sleep in survival mode.
-- Vampire can run faster and jump higher.
-- Hybrid don't fear of the sun and can press sneak button in wrewolf beast form to back to human form.
+# Overview
+- This mod is made to improve the experience of survival mode, also give you the reason to become a dark creature.
+- In orignal game, there is no specific reason to become either vampire or werewolf, the mighty dragonborn is just like a god and fear of nothing.
+- I like the idea of survival mode, but to be honest, survival mode sucks. I play game for fun, not for suffer.
+# What this mod does
+- Werewolf
+  * As a werewolf, you won't be exauhted, and you gain a level based carry weight improve.
+- Vamipre
+  * As a vampire, hungry is no longer a problem. especially for a vampire lord.
+  * Cold also have no effect to an undead.
+  * You gain extra speed and jump height in the night.
+- Hybrid
+  * Have all the advantages and ignore the weeks.
+  * Cancel werewolf beast form anytime you want by press sneak key.
+- Human
+  * Last but not least, when you level-up over 80, fast travel will be unlocked.
+# How to be a hybrid
+- First of all, you need to become a werewolf.
+- Then you go to Hakon and let him to turn you to a vampire lord.
+- Once you become a vampire lord you will lost the beast blood but gain a wolf soul.
+- Equip the Hircine's Cursed Ring to revice Hircine's curse.
+- Wait until the Cursed Ring turn you into werewolf beast form, and you are a hybrid.
 # Requirement
 - [Address Library for SKSE Plugins](https://www.nexusmods.com/skyrimspecialedition/mods/32444)
-- [Survival Mode Improved - SKSE](https://www.nexusmods.com/skyrimspecialedition/mods/78244)
-  * Hard required, I made this mod based on Survival Mode Improved - 1.3.0, so 1.3.0 is the best version to use this mod.
+- Official Survival Mode
 - [powerofthree's Tweaks](https://www.nexusmods.com/skyrimspecialedition/mods/51073)
   * Soft required, without this, you won't able to jump higher as a vampire.
 # Credit
 - [SkyrimScripting](https://github.com/mrowrpurr) for her template and video.
-- [colinswrath](https://github.com/colinswrath/Survival-Mode-Improved-SKSE) for his great mod, really love it.
+- [CommonLibSSE-NG]((https://github.com/CharmedBaryon/CommonLibSSE-NG)
 - [GamerPoets](https://www.youtube.com/watch?v=l3FuJA1UGvQ) for his vedio to help me setup creation kit enviroment.
 - [Nukem](https://www.nexusmods.com/skyrimspecialedition/mods/20061) for the creation kit fix, really a life saver.
