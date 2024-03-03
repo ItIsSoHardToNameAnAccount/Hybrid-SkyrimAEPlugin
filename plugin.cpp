@@ -19,6 +19,7 @@ void InitListener(SKSE::MessagingInterface::Message *a_msg)
         break;
     case SKSE::MessagingInterface::kDataLoaded:
         FormLoader::GetSingleton()->LoadAllForms();
+        Events::Register();
         break;
     }
 }
@@ -27,7 +28,6 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SKSE::Init(skse);
     SetupLog();
     logger::info("log init");
-    Events::Register();
 
     auto messaging = SKSE::GetMessagingInterface();
     if (!messaging->RegisterListener(InitListener))

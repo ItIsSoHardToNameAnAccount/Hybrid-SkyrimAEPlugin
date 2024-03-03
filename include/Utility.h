@@ -23,8 +23,6 @@ public:
 
     RE::BGSPerk *HybridPerk;
 
-    RE::PlayerCharacter *player;
-
     RE::TESRace *playerCurrentRace;
     bool givePlayerWerewolfBonus = false;
 
@@ -36,36 +34,36 @@ public:
 
     RE::PlayerCharacter *GetPlayer()
     {
-        return player;
+        return RE::PlayerCharacter::GetSingleton();
     }
 
     bool PlayerHasBeastBlood()
     {
-        return (player->HasSpell(WerewolfChange));
+        return (RE::PlayerCharacter::GetSingleton()->HasSpell(WerewolfChange));
     }
 
     bool PlayerHasWerewolfBonus()
     {
-        return (player->HasSpell(HybridWerewolfStrength));
+        return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridWerewolfStrength));
     }
 
     bool PlayerHasVampireBonus()
     {
-        return (player->HasSpell(HybridVampireAgility));
+        return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridVampireAgility));
     }
 
     bool PlayerIsHybrid()
     {
-        return (player->HasPerk(HybridPerk));
+        return (RE::PlayerCharacter::GetSingleton()->HasPerk(HybridPerk));
     }
 
     bool PlayerHasWolfSoul()
     {
-        return (player->HasSpell(HybridWolfSoul));
+        return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridWolfSoul));
     }
 
     bool PlayerHasWerewolfControl()
     {
-        return (player->HasSpell(HybridWerewolfControl));
+        return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridWerewolfControl));
     }
 };

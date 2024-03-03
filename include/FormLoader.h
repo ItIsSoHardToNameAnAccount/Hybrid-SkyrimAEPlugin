@@ -22,16 +22,16 @@ public:
     void LoadMiscForms(RE::TESDataHandler *dataHandler)
     {
         auto utility = Utility::GetSingleton();
-        utility->player = RE::PlayerCharacter::GetSingleton();
 
         //Race
-        utility->WerewolfBeastRace = dataHandler->LookupForm(RE::FormID(0x000CDD84), skyrimPluginName)->As<RE::TESRace>();
-        // Vampire lord formId is 0x0200283A, but it seems the first two numbers must be ignore is it's bigger than zero.
+        logger::info("load Race");
+        utility->WerewolfBeastRace = dataHandler->LookupForm(RE::FormID(0x0CDD84), skyrimPluginName)->As<RE::TESRace>();
         utility->DLC1VampireBeastRace = dataHandler->LookupForm(RE::FormID(0x00283A), dawnguardPluginName)->As<RE::TESRace>();
         utility->NordRace = dataHandler->LookupForm(RE::FormID(0x013746), skyrimPluginName)->As<RE::TESRace>();
 
         //Spell
-        utility->WerewolfChange = dataHandler->LookupForm(RE::FormID(0x00092C48), skyrimPluginName)->As<RE::SpellItem>();
+        logger::info("load Spell");
+        utility->WerewolfChange = dataHandler->LookupForm(RE::FormID(0x092C48), skyrimPluginName)->As<RE::SpellItem>();
         utility->HybridRegift = dataHandler->LookupForm(RE::FormID(0x005900), hybridPluginName)->As<RE::SpellItem>();
         utility->HybridHircinesCurse = dataHandler->LookupForm(RE::FormID(0x01EE18), hybridPluginName)->As<RE::SpellItem>();
         utility->HybridWerewolfStrength = dataHandler->LookupForm(RE::FormID(0x019D0E), hybridPluginName)->As<RE::SpellItem>();
@@ -42,12 +42,15 @@ public:
         utility->HybridWerewolfControl = dataHandler->LookupForm(RE::FormID(0x00FB03), hybridPluginName)->As<RE::SpellItem>();
 
         //Keywork
-        utility->Vampire = dataHandler->LookupForm(RE::FormID(0x000A82BB), skyrimPluginName)->As<RE::BGSKeyword>();
+        logger::info("load Keyword");
+        utility->Vampire = dataHandler->LookupForm(RE::FormID(0x0A82BB), skyrimPluginName)->As<RE::BGSKeyword>();
 
         //Armor
-        utility->DA05HircinesRingCursed = dataHandler->LookupForm(RE::FormID(0x000F82FE), skyrimPluginName)->As<RE::TESObjectARMO>();
+        logger::info("load Armor");
+        utility->DA05HircinesRingCursed = dataHandler->LookupForm(RE::FormID(0x0F82FE), skyrimPluginName)->As<RE::TESObjectARMO>();
 
         //Perk
+        logger::info("load Perk");
         utility->HybridPerk = dataHandler->LookupForm(RE::FormID(0x014C06), hybridPluginName)->As<RE::BGSPerk>();
     }
 
