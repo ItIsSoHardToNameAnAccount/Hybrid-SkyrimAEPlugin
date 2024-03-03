@@ -29,6 +29,6 @@ Skyrim SKSE plugin allow player become both werewolf and vampire.
   * Soft required, without this, you won't able to jump higher as a vampire.
 # Credit
 - [SkyrimScripting](https://github.com/mrowrpurr) for her template and video.
-- [CommonLibSSE-NG]((https://github.com/CharmedBaryon/CommonLibSSE-NG)
+- [CommonLibSSE-NG](https://github.com/CharmedBaryon/CommonLibSSE-NG)
 - [GamerPoets](https://www.youtube.com/watch?v=l3FuJA1UGvQ) for his vedio to help me setup creation kit enviroment.
 - [Nukem](https://www.nexusmods.com/skyrimspecialedition/mods/20061) for the creation kit fix, really a life saver.
