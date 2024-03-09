@@ -19,7 +19,7 @@ namespace Serialization
     inline void UpdatePlugin()
     {
         CSimpleIniA ini;
-        SI_Error rc = ini.LoadFile("Data/SKSE/Plugins/config.ini");
+        SI_Error rc = ini.LoadFile("Data/SKSE/Plugins/Hybrid.ini");
         if (rc != SI_OK)
         {
             logger::error("failed to read ini file.");
