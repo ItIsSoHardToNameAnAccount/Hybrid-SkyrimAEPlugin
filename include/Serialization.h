@@ -1,6 +1,8 @@
 #pragma once
 #include "Utility.h"
 #include "logger.h"
+#include "Events.h"
+
 #include <SimpleIni.h>
 
 namespace Serialization
@@ -22,7 +24,7 @@ namespace Serialization
         SI_Error rc = ini.LoadFile("Data/SKSE/Plugins/Hybrid.ini");
         if (rc != SI_OK)
         {
-            logger::error("failed to read ini file.");
+            logger::error("Failed to read ini file.");
             return;
         }
         bool bNeedUpdate = ini.GetBoolValue("Settings", "bNeedUpdate", "false");
@@ -40,6 +42,11 @@ namespace Serialization
             }
             bNeedUpdate = false;
             ini.SetBoolValue("Settings", "bNeedUpdate", bNeedUpdate);
+            rc = ini.SaveFile("Data/SKSE/Plugins/Hybrid.ini");
+            if (rc < 0)
+            {
+                logger::error("Failed to write ini file.");
+            }
         }
     }
 
@@ -49,6 +56,11 @@ namespace Serialization
         auto playerCharacter = utility->GetPlayer();
 
         utility->playerCurrentRace = playerCharacter->GetRace();
+
+        if (utility->PlayerHasWolfSoul() && playerCharacter->HasKeyword(utility->Vampire))
+        {
+            Events::EquipEventHandler::Register();
+        }
 
         UpdatePlugin();
     }
