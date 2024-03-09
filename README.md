@@ -24,11 +24,7 @@ Skyrim SKSE plugin allow player become both werewolf and vampire.
 - Wait until the Cursed Ring turn you into werewolf beast form, and you are a hybrid.
 # Knowing Issues
 - Player's Race set to "PlayerRace"
-  * This is a original bug, at least not caused by this mod.
-  * This bug happens when you use "showracemenu" console command to change your character's appearence in the mid of game.
-  * If you do so, when you become a vampire race you will lost your true race and become no one.
-  * I haven't fully tested this bug and don't know how to fix it yet, but this bug will bug this mod.
-  * So the best way is try not to trigger it.
+  * This is an original bug, at least not caused by this mod. When game set player's race to related vampire race, player's race become unrecognized as a "PlayerRace", then game can not get player's race through Game.GetPlayer().GetRace(). Back to mortal race seems don't have this problem.
 # Requirement
 - [Address Library for SKSE Plugins](https://www.nexusmods.com/skyrimspecialedition/mods/32444)
 - Official Survival Mode
