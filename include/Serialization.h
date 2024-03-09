@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility.h"
 #include "logger.h"
+#include <SimpleIni.h>
 
 namespace Serialization
 {
@@ -15,12 +16,41 @@ namespace Serialization
         utility->playerCurrentRace = utility->NordRace;
     }
 
+    inline void UpdatePlugin()
+    {
+        CSimpleIniA ini;
+        SI_Error rc = ini.LoadFile("Data/SKSE/Plugins/config.ini");
+        if (rc != SI_OK)
+        {
+            logger::error("failed to read ini file.");
+            return;
+        }
+        bool bNeedUpdate = ini.GetBoolValue("Settings", "bNeedUpdate", "false");
+        if (bNeedUpdate)
+        {
+            auto utility = Utility::GetSingleton();
+            // Update Werewolf
+            if (utility->PlayerHasWerewolfBonus())
+            {
+                utility->UpdateWerewolfBonus();
+            }
+            if (utility->PlayerHasVampireBonus())
+            {
+                utility->UpdateVampireBonus();
+            }
+            bNeedUpdate = false;
+            ini.SetBoolValue("Settings", "bNeedUpdate", bNeedUpdate);
+        }
+    }
+
     inline void LoadChecks()
     {
         auto utility = Utility::GetSingleton();
         auto playerCharacter = utility->GetPlayer();
 
         utility->playerCurrentRace = playerCharacter->GetRace();
+
+        UpdatePlugin();
     }
 
     inline void SaveCallback(SKSE::SerializationInterface* a_skse)

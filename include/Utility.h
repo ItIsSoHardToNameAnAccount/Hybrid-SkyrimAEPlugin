@@ -47,9 +47,21 @@ public:
         return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridWerewolfStrength));
     }
 
+    void UpdateWerewolfBonus()
+    {
+        RE::PlayerCharacter::GetSingleton()->RemoveSpell(HybridWerewolfStrength);
+        RE::PlayerCharacter::GetSingleton()->AddSpell(HybridWerewolfStrength);
+    }
+
     bool PlayerHasVampireBonus()
     {
         return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridVampireAgility));
+    }
+
+    void UpdateVampireBonus()
+    {
+        RE::PlayerCharacter::GetSingleton()->RemoveSpell(HybridVampireAgility);
+        RE::PlayerCharacter::GetSingleton()->AddSpell(HybridVampireAgility);
     }
 
     bool PlayerIsHybrid()

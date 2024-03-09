@@ -1,8 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
     "name": "hybrid",
-    "version-string": "2.0.1",
+    "version-string": "2.1.0",
     "dependencies": [
-        "commonlibsse-ng"
+      "commonlibsse-ng",
+      "simpleini"
     ]
 }
