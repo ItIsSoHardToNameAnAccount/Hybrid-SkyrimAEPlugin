@@ -4,17 +4,30 @@
 
 namespace Events
 {
-    static void ProcessHircineCursedRingEquipEvent(RE::TESObjectARMO *equipment)
+    static void ProcessHircineCursedRingEquipEvent(RE::TESObjectARMO *equipment, bool bEquiped)
     {
         auto utility = Utility::GetSingleton();
         auto playerCharacter = utility->GetPlayer();
 
-        if (equipment == utility->DA05HircinesRingCursed)
+        if (equipment != utility->DA05HircinesRingCursed)
         {
-            //untested code, still not sure if unequip the ring would trigger this event
-            if (!utility->PlayerIsHybrid())
+            return;
+        }
+
+        if (bEquiped)
+        {
+            logger::info("Ring of Hircines Cursed Equiped.");
+            if (utility->PlayerHasWolfSoul())
             {
                 playerCharacter->AddSpell(utility->HybridHircinesCurse);
+            }
+        }
+        else
+        {
+            logger::info("Ring of Hircines Cursed Unequiped.");
+            if (playerCharacter->HasSpell(utility->HybridHircinesCurse))
+            {
+                playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
             }
         }
     }
@@ -39,8 +52,8 @@ namespace Events
 
             const std::lock_guard<std::mutex> lock(HircineCursedRing_mutex);
             auto equipment = RE::TESForm::LookupByID<RE::TESObjectARMO>(a_event->baseObject);
-            ProcessHircineCursedRingEquipEvent(equipment);
 
+            ProcessHircineCursedRingEquipEvent(equipment, a_event->equipped);
 
             return RE::BSEventNotifyControl::kContinue;
         }
