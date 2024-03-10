@@ -78,4 +78,9 @@ public:
     {
         return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridWerewolfControl));
     }
+
+    bool PlayerHasHircinesCurse()
+    {
+        return (RE::PlayerCharacter::GetSingleton()->HasSpell(HybridHircinesCurse));
+    }
 };

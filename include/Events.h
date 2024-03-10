@@ -19,15 +19,9 @@ namespace Events
             logger::info("Ring of Hircines Cursed Equiped.");
             if (utility->PlayerHasWolfSoul())
             {
+                logger::info("Once player wear this ring, there is no way to get rid of it");
                 playerCharacter->AddSpell(utility->HybridHircinesCurse);
-            }
-        }
-        else
-        {
-            logger::info("Ring of Hircines Cursed Unequiped.");
-            if (playerCharacter->HasSpell(utility->HybridHircinesCurse))
-            {
-                playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
+                playerCharacter->RemoveSpell(utility->HybridWolfSoul);
             }
         }
     }
@@ -83,18 +77,19 @@ namespace Events
             {
                 if (!utility->PlayerHasBeastBlood())
                 {
+                    logger::info("Player become a werewolf, add spell Beast Form");
                     playerCharacter->AddSpell(utility->HybridRegift);
                 }
 
                 if (!utility->PlayerHasWerewolfBonus())
                 {
-                    //logger::info("Player is once a werewolf again, give him werewolf bonus when he back to human form");
+                    logger::info("Player become a werewolf, add werewolf bonus when back to human form");
                     utility->givePlayerWerewolfBonus = true;
                 }
 
                 if (utility->PlayerIsHybrid())
                 {
-                    //logger::info("Allow player back to human form anytime he want");
+                    logger::info("Hybrid can control werewolf");
                     playerCharacter->AddSpell(utility->HybridWerewolfControl);
                 }
             }
@@ -102,32 +97,38 @@ namespace Events
             {
                 if (!utility->PlayerHasVampireBonus() && playerRace != utility->DLC1VampireBeastRace)
                 {
-                    //logger::info("player is a vampire, give him vampire bonus");
+                    logger::info("Player become a vampire, add vampire bonus");
                     playerCharacter->AddSpell(utility->HybridVampireAgility);
+                }
+
+                if (utility->PlayerHasWerewolfControl())
+                {
+                    logger::info("Remove werewolf control anyway");
+                    playerCharacter->RemoveSpell(utility->HybridWerewolfControl);
                 }
 
                 if (!utility->PlayerIsHybrid())
                 {
                     if (utility->PlayerHasWerewolfBonus())
                     {
-                        //logger::info("player is a vampire, remove werewolf bonus from him but keep the wolf soul with him.");
+                        logger::info("Player is a vampire with werewolf bonus, remove bonus and set c00");
                         playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
                         playerCharacter->AddSpell(utility->HybridWolfSoul);
                         playerCharacter->AddSpell(utility->HybridVampireBlood);
                         EquipEventHandler::Register();
                     }
-                    else if (utility->PlayerHasBeastBlood() && utility->PlayerHasWolfSoul())
+                    else if (utility->PlayerHasBeastBlood() && utility->PlayerHasHircinesCurse())
                     {
-                        //logger::info("player is a hybrid");
+                        logger::info("Player is a hybrid");
                         playerCharacter->AddPerk(utility->HybridPerk);
-                        playerCharacter->RemoveSpell(utility->HybridWolfSoul);
+                        playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
                         playerCharacter->AddSpell(utility->HybridWerewolfStrength);
                         EquipEventHandler::Unregister();
                     }
                 }
                 else
                 {
-                    //logger::info("player is a hybrid, but he chose to cure werewolf");
+                    logger::info("Player is a hybrid, but he chose to cure werewolf");
                     if (!utility->PlayerHasBeastBlood())
                     {
                         playerCharacter->RemovePerk(utility->HybridPerk);
@@ -138,9 +139,9 @@ namespace Events
             }
             else
             {
-                //logger::info("player is mortal");
                 if (utility->givePlayerWerewolfBonus && utility->PlayerHasBeastBlood() && !utility->PlayerHasWerewolfBonus())
                 {
+                    logger::info("Player is a werewolf but in human form");
                     playerCharacter->AddSpell(utility->HybridWerewolfStrength);
                     utility->givePlayerWerewolfBonus = false;
                 }
@@ -148,32 +149,40 @@ namespace Events
                 //cure thread
                 if (utility->PlayerIsHybrid())
                 {
-                    //logger::info("player cure vampire but left werewolf");
-                    //logger::info("Cure Beast Blood is used to reset c00");
+                    logger::info("Player cure vampire");
                     playerCharacter->AddSpell(utility->HybridCureBeastBlood);
                     playerCharacter->RemovePerk(utility->HybridPerk);
                     playerCharacter->RemoveSpell(utility->HybridVampireAgility);
                 }
-                else if (utility->PlayerHasWolfSoul())
+                
+                if (utility->PlayerHasWolfSoul())
                 {
-                    //logger::info("player chose to cure vampire when he is not a hybrid");
+                    logger::info("Human don't have wolf soul");
                     playerCharacter->RemoveSpell(utility->HybridWolfSoul);
-                    playerCharacter->RemoveSpell(utility->HybridVampireAgility);
                     EquipEventHandler::Unregister();
+                }
+
+                if (utility->PlayerHasHircinesCurse())
+                {
+                    logger::info("Human don't have curse");
+                    playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
+                }
+
+                if (utility->PlayerHasVampireBonus())
+                {
+                    logger::info("Player cure vampire");
+                    playerCharacter->RemoveSpell(utility->HybridVampireAgility);
                 }
 
                 if (utility->PlayerHasWerewolfBonus() && !utility->PlayerHasBeastBlood())
                 {
-                    //logger::info("player cure werewolf");
+                    logger::info("Player cure werewolf");
                     playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
                 }
-                
-                if (utility->PlayerHasVampireBonus())
-                {
-                    //logger::info("player cure vampire");
-                    playerCharacter->RemoveSpell(utility->HybridVampireAgility);
-                }
             }
+
+            logger::info("Player was {}", utility->playerCurrentRace->GetName());
+            logger::info("Player is {} now", playerRace->GetName());
 
             utility->playerCurrentRace = playerRace;
         }

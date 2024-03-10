@@ -57,6 +57,11 @@ namespace Serialization
 
         utility->playerCurrentRace = playerCharacter->GetRace();
 
+        if (utility->PlayerHasBeastBlood() && !utility->PlayerHasWerewolfBonus())
+        {
+            utility->givePlayerWerewolfBonus = true;
+        }
+
         if (utility->PlayerHasWolfSoul() && playerCharacter->HasKeyword(utility->Vampire))
         {
             Events::EquipEventHandler::Register();
