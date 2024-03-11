@@ -107,6 +107,12 @@ namespace Events
                     playerCharacter->RemoveSpell(utility->HybridWerewolfControl);
                 }
 
+                if (playerCharacter->HasSpell(utility->HybridVampireBlood))
+                {
+                    logger::error("VampireBlood Error, try to fix");
+                    playerCharacter->RemoveSpell(utility->HybridVampireBlood);
+                }
+
                 if (!utility->PlayerIsHybrid())
                 {
                     if (utility->PlayerHasWerewolfBonus())
@@ -128,9 +134,21 @@ namespace Events
                 }
                 else
                 {
-                    logger::info("Player is a hybrid, but he chose to cure werewolf");
+                    // Check Error
+                    if (playerCharacter->HasSpell(utility->HybridRegift))
+                    {
+                        logger::error("HybridRegift Error, try to fix");
+                        playerCharacter->RemoveSpell(utility->HybridRegift);
+                    }
+                    if (playerCharacter->HasSpell(utility->HybridHircinesCurse))
+                    {
+                        logger::error("Hircines Curse Error, try to fix");
+                        playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
+                    }
+
                     if (!utility->PlayerHasBeastBlood())
                     {
+                        logger::info("Player is a hybrid, but he chose to cure werewolf");
                         playerCharacter->RemovePerk(utility->HybridPerk);
                         playerCharacter->RemoveSpell(utility->HybridWerewolfStrength);
                         playerCharacter->AddSpell(utility->HybridCureBeastBlood);

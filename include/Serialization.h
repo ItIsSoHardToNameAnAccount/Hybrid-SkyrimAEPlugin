@@ -67,6 +67,24 @@ namespace Serialization
             Events::EquipEventHandler::Register();
         }
 
+        // Check Player Race
+        if (utility->PlayerIsHybrid())
+        {
+            logger::info("Load Check: player is hybrid");
+        }
+        else if (utility->PlayerHasBeastBlood())
+        {
+            logger::info("Load Check: player is werewolf");
+        }
+        else if (playerCharacter->HasKeyword(utility->Vampire))
+        {
+            logger::info("Load Check: player is vampire");
+        }
+        else
+        {
+            logger::info("Load Check: player is human");
+        }
+
         UpdatePlugin();
     }
 
