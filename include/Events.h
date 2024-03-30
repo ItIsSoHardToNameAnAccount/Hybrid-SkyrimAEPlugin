@@ -132,7 +132,7 @@ namespace Events
                         EquipEventHandler::Unregister();
                     }
                 }
-                else
+                else if (playerRace != utility->DLC1VampireBeastRace && playerRace != utility->WerewolfBeastRace)
                 {
                     // Check Error
                     if (playerCharacter->HasSpell(utility->HybridRegift))
@@ -144,6 +144,13 @@ namespace Events
                     {
                         logger::error("Hircines Curse Error, try to fix");
                         playerCharacter->RemoveSpell(utility->HybridHircinesCurse);
+                    }
+
+                    if (utility->givePlayerWerewolfBonus)
+                    {
+                        logger::info("Give player werewolf bonus");
+                        playerCharacter->AddSpell(utility->HybridWerewolfStrength);
+                        utility->givePlayerWerewolfBonus = false;
                     }
 
                     if (!utility->PlayerHasBeastBlood())
@@ -159,7 +166,7 @@ namespace Events
             {
                 if (utility->givePlayerWerewolfBonus && utility->PlayerHasBeastBlood() && !utility->PlayerHasWerewolfBonus())
                 {
-                    logger::info("Player is a werewolf but in human form");
+                    logger::info("Player is a werewolf, give player werewolf bonus.");
                     playerCharacter->AddSpell(utility->HybridWerewolfStrength);
                     utility->givePlayerWerewolfBonus = false;
                 }
